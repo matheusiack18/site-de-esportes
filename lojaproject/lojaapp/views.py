@@ -152,9 +152,16 @@ class CheckoutView(CreateView):
             form.instance.desconto = 0
             form.instance.total = carro_obj.total
             form.instance.pedido_status = "Pedido Recebido"
+            del self.request.session['carro_id']
         else:
             return redirect("lojaapp:home")
         return super().form_valid(form)
+    
+class ClienteRegistrarView(CreateView):
+    template_name = "clienteregistrar.html"
+    form_class = ClienteRegistrarForm
+    success_url = reverse_lazy("lojaapp:home")
+
 
 class SobreView(TemplateView):
     template_name = "sobre.html"
