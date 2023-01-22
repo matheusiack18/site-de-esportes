@@ -16,8 +16,12 @@
  
         {% if request.user.cliente %}
         Seja bem vindo {{request.user.username}} !
+
+        <a class="btn btn-outline-danger" href="{% url 'lojaapp:clientesair'%}">SAIR</a>
+
         {% else %}
-        <a class="btn btn-outline-info" href="{% url 'lojaapp:clienteregistrar' %}">LOGIN</a> 
+        <a class="btn btn-outline-success" href="{% url 'lojaapp:clienteregistrar' %}">LOGIN</a>    &nbsp   &nbsp   &nbsp 
+        <a class="btn btn-outline-success" href="{% url 'lojaapp:clienteentrar' %}">ENTRAR</a>
         {% endif %}
 
 

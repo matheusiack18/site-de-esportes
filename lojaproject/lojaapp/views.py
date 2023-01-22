@@ -1,27 +1,36 @@
 from django.shortcuts import render, redirect
-from django.views.generic import View,TemplateView, CreateView
+from django.views.generic import View,TemplateView, CreateView, FormView
 from django.urls import reverse_lazy
-from .forms import Checar_PedidoForm, ClienteRegistrarForm
+from .forms import Checar_PedidoForm, ClienteRegistrarForm, ClienteEntrarForm
 from.models import *
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, logout, login
 
+class LojaMixin(object):
+    def dispatch(self, request,*args,**kwargs):
+        carro_id = request.session.get("carro_id")
+        if carro_id:
+            carro_obj = Carro.objects.get(id=carro_id)
+            if request.user.is_authenticated and request.user.cliente:
+                carro_obj.cliente = request.user.cliente
+                carro_obj.save()
+        return super().dispatch(request, *args, **kwargs)
 
-class HomeView(TemplateView):
+class HomeView(LojaMixin,TemplateView):
     template_name = "home.html"
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['produto_list'] = Produto.objects.all().order_by("id")
         return context
 
-class TodosProdutosView(TemplateView):
+class TodosProdutosView(LojaMixin,TemplateView):
     template_name = "todosprodutos.html"
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['todoscategorias'] = Categoria.objects.all
         return context
 
-class ProdutoDetalheView(TemplateView):
+class ProdutoDetalheView(LojaMixin,TemplateView):
     template_name = "produtodetalhe.html"
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -33,7 +42,7 @@ class ProdutoDetalheView(TemplateView):
         return context
 
 
-class AddCarroView(TemplateView):
+class AddCarroView(LojaMixin,TemplateView):
     template_name = "addprocarro.html"
 
     def get_context_data(self, **kwargs):
@@ -77,7 +86,7 @@ class AddCarroView(TemplateView):
             carro_obj.save()
         return context
  
-class ManipularCarroView(View):
+class ManipularCarroView(LojaMixin,View):
     def get(self,request,*args, **kwargs):
         cp_id = self.kwargs["cp_id"]
         acao = request.GET.get("acao")
@@ -106,7 +115,7 @@ class ManipularCarroView(View):
             pass
         return redirect("lojaapp:meucarro")
 
-class LimparCarroView(View):
+class LimparCarroView(LojaMixin,View):
     def get(self,request,*args, **kwargs):
         carro_id = request.session.get("carro_id",None)
         if carro_id:
@@ -118,7 +127,7 @@ class LimparCarroView(View):
 
         return redirect("lojaapp:meucarro")
 
-class MeuCarroView(TemplateView):
+class MeuCarroView(LojaMixin,TemplateView):
     template_name = "meucarro.html"
     def get_context_data(self, **kwargs):
         context =super().get_context_data(**kwargs)
@@ -131,10 +140,18 @@ class MeuCarroView(TemplateView):
         return context
 
 
-class CheckoutView(CreateView):
+class CheckoutView(LojaMixin,CreateView):
     template_name = "processar.html"
     form_class = Checar_PedidoForm
     success_url = reverse_lazy("lojaapp:home")
+
+    def dispatch(self,request, *args,**kwargs):
+        if request.user.is_authenticated and request.user.cliente:
+            pass
+        else:
+            return redirect("/entrar/?next=/checkout/")
+        return super().dispatch(request, *args, **kwargs)
+
 
     def get_context_data(self, **kwargs):
         context =super().get_context_data(**kwargs)
@@ -174,10 +191,46 @@ class ClienteRegistrarView(CreateView):
         login(self.request,user)
         return super().form_valid(form)
     
-class SobreView(TemplateView):
+    def get_success_url(self):
+        if "next" in self.request.GET:
+            next_url = self.request.GET.get("next")
+            return next_url
+        else:
+            return super.success_url
+
+class ClienteSairView(View):
+    def get (self,request):
+        logout(request)
+        return redirect("lojaapp:home")   
+
+class ClienteEntrarView(FormView):
+    template_name = "clienteentrar.html"
+    form_class = ClienteEntrarForm
+    success_url = reverse_lazy("lojaapp:home")
+
+    def form_valid(self, form):
+        unome = form.cleaned_data.get("username")
+        pword = form.cleaned_data.get("password")
+        usr = authenticate(username=unome,password=pword)
+
+        if usr is not None and usr.cliente:
+            login(self.request, usr)
+        else:
+            return render(self.request,self.template_name, {"form":self.form_class,"error": "Usuario ou Senha não correspondem"})
+        return super().form_valid(form)
+    
+    def get_success_url(self):
+        if "next" in self.request.GET:
+            next_url = self.request.GET.get("next")
+            return next_url
+        else:
+            return super.success_url
+ 
+    
+class SobreView(LojaMixin,TemplateView):
     template_name = "sobre.html"
 
-class ContatoView(TemplateView):
+class ContatoView(LojaMixin,TemplateView):
     template_name = "contato.html"
 
 

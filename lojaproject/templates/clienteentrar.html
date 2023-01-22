@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title%}Entrar{% endblock %}
+
+
+{% block content %}
+<style>
+    .errorlist{
+        color: blue;
+        list-style: none;
+    }
+</style>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+           <h3>Entrar</h3>
+           <form action="" method="POST">
+            {% csrf_token %}
+            {{form.as_p}}
+            <button class="btn-sm btn-success">Entrar</button>
+            {% if error %}
+            <li style="color:brown; list-style-type: none;">{{error}}</li>
+
+            {% endif %}
+
+           </form>  
+           <p>Se você não esta cadastrado, <a href="{%url 'lojaapp:clienteregistrar' %}{% if request.GET.next%}?next={{request.GET.next}}{% endif %}">clique aqui</a></p>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
