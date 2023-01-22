@@ -3,6 +3,9 @@ from django.views.generic import View,TemplateView, CreateView
 from django.urls import reverse_lazy
 from .forms import Checar_PedidoForm, ClienteRegistrarForm
 from.models import *
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login, logout
+
 
 class HomeView(TemplateView):
     template_name = "home.html"
@@ -163,11 +166,12 @@ class ClienteRegistrarView(CreateView):
     success_url = reverse_lazy("lojaapp:home")
 
     def form_valid(self, form):
-        usuario = form.cleaned_data.get("usuario") 
-        senha = form.cleaned_data.get("senha") 
+        username = form.cleaned_data.get("username") 
+        password = form.cleaned_data.get("password") 
         email = form.cleaned_data.get("email") 
-        user = User.objects.create_user(usuario,email,senha)
+        user = User.objects.create_user(username,email,password)
         form.instance.user = user
+        login(self.request,user)
         return super().form_valid(form)
     
 class SobreView(TemplateView):
