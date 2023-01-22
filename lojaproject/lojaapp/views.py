@@ -169,7 +169,7 @@ class ClienteRegistrarView(CreateView):
         user = User.objects.create_user(usuario,email,senha)
         form.instance.user = user
         return super().form_valid(form)
-        
+    
 class SobreView(TemplateView):
     template_name = "sobre.html"
 
