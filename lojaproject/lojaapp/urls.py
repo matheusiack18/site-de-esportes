@@ -15,6 +15,9 @@ urlpatterns = [
     path("limpar-carro/", LimparCarroView.as_view(), name="limparcarro"),
     path("checkout/", CheckoutView.as_view(), name="checkout"),
     path("registrar/", ClienteRegistrarView.as_view(), name="clienteregistrar"),
+    path("sair/", ClienteSairView.as_view(), name="clientesair"),
+    path("entrar/", ClienteEntrarView.as_view(), name="clienteentrar"),
+
 
 
 

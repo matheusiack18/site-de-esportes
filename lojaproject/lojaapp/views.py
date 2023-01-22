@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
-from django.views.generic import View,TemplateView, CreateView
+from django.views.generic import View,TemplateView, CreateView, FormView
 from django.urls import reverse_lazy
-from .forms import Checar_PedidoForm, ClienteRegistrarForm
+from .forms import Checar_PedidoForm, ClienteRegistrarForm, ClienteEntrarForm
 from.models import *
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
@@ -173,6 +173,28 @@ class ClienteRegistrarView(CreateView):
         form.instance.user = user
         login(self.request,user)
         return super().form_valid(form)
+
+class ClienteSairView(View):
+    def pegar (self,request):
+        logout(request)
+        return redirect("lojaapp:home")   
+
+class ClienteEntrarView(FormView):
+    template_name = "clienteentrar.html"
+    form_class = ClienteEntrarForm
+    success_url = reverse_lazy("lojaapp:home")
+
+    def form_valid(self, form):
+        unome = form.cleaned_data.get("username")
+        pword = form.cleaned_data.get("password")
+        usr = authenticate(username=unome,password=pword)
+
+        if usr is not None and usr.cliente:
+            login(self.request, usr)
+        else:
+            return render(self.request,self.template_name, {"form":self.form_class,"error": "Usuario ou Senha não correspondem"})
+        return super().form_valid(form)
+ 
     
 class SobreView(TemplateView):
     template_name = "sobre.html"
