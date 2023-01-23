@@ -224,7 +224,7 @@ class ClienteEntrarView(FormView):
             next_url = self.request.GET.get("next")
             return next_url
         else:
-            return super.success_url
+            return self.success_url
  
     
 class SobreView(LojaMixin,TemplateView):
@@ -232,5 +232,25 @@ class SobreView(LojaMixin,TemplateView):
 
 class ContatoView(LojaMixin,TemplateView):
     template_name = "contato.html"
+
+class ClientePerfilView(TemplateView):
+    template_name = "clienteperfil.html"
+    def dispatch(self,request, *args,**kwargs):
+        if request.user.is_authenticated and request.user.cliente:
+            pass
+        else:
+            return redirect("/entrar/?next=/perfil/")
+        return super().dispatch(request, *args, **kwargs)
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        
+        cliente = self.request.user.cliente
+        context['cliente'] = cliente 
+
+        Pedidos = Pedido_order.objects.filter(carro__cliente=cliente)
+        context['pedidos'] = Pedidos 
+
+        return context 
 
 
