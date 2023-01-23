@@ -17,7 +17,9 @@
         {% if request.user.cliente %}
         Seja bem vindo {{request.user.username}} !
 
+        <a class="btn btn-outline-dark" href="{% url 'lojaapp:clienteperfil'%}">MEU PERFIL</a>
         <a class="btn btn-outline-danger" href="{% url 'lojaapp:clientesair'%}">SAIR</a>
+
 
         {% else %}
         <a class="btn btn-outline-success" href="{% url 'lojaapp:clienteregistrar' %}">LOGIN</a>    &nbsp   &nbsp   &nbsp 

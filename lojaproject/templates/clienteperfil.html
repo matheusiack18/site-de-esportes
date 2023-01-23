@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block title%}Perfil{% endblock %}
+
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+           <h3>Detalhes do Cliente: </h3>
+           <p><span class="font-weight-bold">Nome: </span>{{cliente.nome_completo}}</p> 
+           <p><span class="font-weight-bold">Usuario: </span>{{cliente.user.username}}</p> 
+           <p><span class="font-weight-bold">Email: </span>{{cliente.user.email}}</p> 
+           <p><span class="font-weight-bold">Endereço: </span>{{cliente.endereco}}</p> 
+           <p><span class="font-weight-bold">Cadastrado em: </span>{{cliente.data_on}}</p> 
+
+
+
+
+
+        </div>
+        <div class="col-md-8">
+            <h3>Compras Anteriores</h3>
+            <br>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Codigo</th>
+                        <th>Pedido ID</th>
+                        <th>Valor</th>
+                        <th>Data Pedido</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for pedidos in pedidos %}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>Pedido N°: {{pedidos.id}}</td>
+                        <td>{{pedidos.total}}</td>
+                        <td>{{pedidos.criado_em}}</td>
+                        <td>{{pedidos.pedido_status}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+ 
+         </div>
+    </div>
+</div>
+
+
+{% endblock %}
