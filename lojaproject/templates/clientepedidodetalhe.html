@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load humanize %}
 {% block title%}Detalhes do Pedido{% endblock %}
 
 
@@ -32,15 +33,14 @@
 
                     <tr>
                         <td>{{forloop.counter}}</td>
-                        <td>{{cp.produto.titulo}}{{cp.produto.id}}</td>
+                        <td><a target="blank" href="{% url 'lojaapp:produtodetalhe' cp.produto.slug %}">{{cp.produto.titulo}}{{cp.produto.id}}</a></td>
                         <td>{{cp.avaliacao}}</td>
                         <td>{{cp.quantidade}}</td>
                         <td>{{cp.subtotal}}</td>
                     </tr>
 
                     {% endfor %}
-                    <th colspan="4" class="text-right">Valor Total: </th>
-                    <th>R$ {{pedido_obj.total}}</th>
+                    <th colspan="5" class="text-right">Valor Total: R$ {{pedido_obj.total|intcomma}}</th>
 
                 </tbody>
             </table>

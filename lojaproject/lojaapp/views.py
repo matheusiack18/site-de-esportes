@@ -248,7 +248,7 @@ class ClientePerfilView(TemplateView):
         cliente = self.request.user.cliente
         context['cliente'] = cliente 
 
-        Pedidos = Pedido_order.objects.filter(carro__cliente=cliente)
+        Pedidos = Pedido_order.objects.filter(carro__cliente=cliente).order_by("-id")
         context['pedidos'] = Pedidos 
 
         return context 
@@ -259,7 +259,11 @@ class ClientePedidoDetalhesView(DetailView):
     context_object_name="pedido_obj"
     def dispatch(self,request, *args,**kwargs):
         if request.user.is_authenticated and request.user.cliente:
-            pass
+            order_id = self.kwargs["pk"]
+            pedido = Pedido_order.objects.get(id=order_id)
+            if request.user.cliente != pedido.carro.cliente:
+                return redirect("lojaapp:clienteperfil")
+
         else:
             return redirect("/entrar/?next=/perfil/")
         return super().dispatch(request, *args, **kwargs)
