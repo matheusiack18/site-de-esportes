@@ -19,8 +19,11 @@ urlpatterns = [
     path("entrar/", ClienteEntrarView.as_view(), name="clienteentrar"),
     path("perfil/", ClientePerfilView.as_view(), name="clienteperfil"),
     path("perfil/pedido-<int:pk>/", ClientePedidoDetalhesView.as_view(), name="clientepedidodetalhe"),
+    path("admin-login/", AdminLoginView.as_view(), name="adminlogin"),
 
-
+    path("admin-home/", AdminHomeView.as_view(), name="adminhome"),
+    path("admin-pedido-<int:pk>/", AdminPedidoDetalheView.as_view(), name="adminpedidodetalhe"),
+    path("admin-todos-pedidos/", AdminPedidoListaView.as_view(), name="adminpedidolista"),
 
 
 
