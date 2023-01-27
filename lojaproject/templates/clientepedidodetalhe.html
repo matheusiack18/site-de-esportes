@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block title%}Detalhes do Pedido{% endblock %}
+
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <h3>Detalhes Do Pedido</h3>
+            <hr>
+            <p><spam class= "font-weight-bold">Pedido ID: </spam>{{pedido_obj.id}}</p>
+            <p><spam class= "font-weight-bold">Status do Pedido: </spam>{{pedido_obj.pedido_status}}</p>
+            <p><spam class= "font-weight-bold">Data do Pedido: </spam>{{pedido_obj.criado_em}}</p>
+            <p><spam class= "font-weight-bold">Nome do Cliente: </spam>{{pedido_obj.ordernando_por}}</p>
+            <p><spam class= "font-weight-bold">Telefone do Cliente: </spam>{{pedido_obj.telefone}}</p>
+            <p><spam class= "font-weight-bold">Endereço do Cliente: </spam>{{pedido_obj.endereco_envio}}</p>
+            <p><spam class= "font-weight-bold">Email do Cliente: </spam>{{pedido_obj.email}}</p>
+            <hr>
+            <h4>Itens do Pedido</h4>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Codigo</th>
+                        <th>Item</th>
+                        <th>Avaliação</th>
+                        <th>Quantidade</th>
+                        <th>Subtotal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for cp in pedido_obj.carro.carroproduto_set.all %}
+
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{cp.produto.titulo}}{{cp.produto.id}}</td>
+                        <td>{{cp.avaliacao}}</td>
+                        <td>{{cp.quantidade}}</td>
+                        <td>{{cp.subtotal}}</td>
+                    </tr>
+
+                    {% endfor %}
+                    <th colspan="4" class="text-right">Valor Total: </th>
+                    <th>R$ {{pedido_obj.total}}</th>
+
+                </tbody>
+            </table>
+        </div>
+
+        </div>
+    </div>
+
+
+{% endblock %}
