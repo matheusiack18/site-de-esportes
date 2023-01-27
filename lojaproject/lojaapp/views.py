@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.views.generic import View,TemplateView, CreateView, FormView
+from django.views.generic import View,TemplateView, CreateView, FormView, DetailView
 from django.urls import reverse_lazy
 from .forms import Checar_PedidoForm, ClienteRegistrarForm, ClienteEntrarForm
 from.models import *
@@ -188,7 +188,7 @@ class ClienteRegistrarView(CreateView):
         email = form.cleaned_data.get("email") 
         user = User.objects.create_user(username,email,password)
         form.instance.user = user
-        login(self.request,user)
+        login(self.request, user)
         return super().form_valid(form)
     
     def get_success_url(self):
@@ -196,7 +196,7 @@ class ClienteRegistrarView(CreateView):
             next_url = self.request.GET.get("next")
             return next_url
         else:
-            return super.success_url
+            return self.success_url
 
 class ClienteSairView(View):
     def get (self,request):
@@ -252,5 +252,18 @@ class ClientePerfilView(TemplateView):
         context['pedidos'] = Pedidos 
 
         return context 
+    
+class ClientePedidoDetalhesView(DetailView):
+    template_name = "clientepedidodetalhe.html"
+    model = Pedido_order
+    context_object_name="pedido_obj"
+    def dispatch(self,request, *args,**kwargs):
+        if request.user.is_authenticated and request.user.cliente:
+            pass
+        else:
+            return redirect("/entrar/?next=/perfil/")
+        return super().dispatch(request, *args, **kwargs)
 
 
+
+ 
