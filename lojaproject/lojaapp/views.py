@@ -3,6 +3,7 @@ from django.views.generic import View,TemplateView, CreateView, FormView, Detail
 from django.urls import reverse_lazy
 from .forms import Checar_PedidoForm, ClienteRegistrarForm, ClienteEntrarForm
 from.models import *
+from django.db.models import Q
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, logout, login
 
@@ -307,6 +308,12 @@ class AdminPedidoDetalheView(AdminRequireMixin, DetailView):
     model = Pedido_order
     context_object_name = "pedido_obj"
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["todosststus"] = PEDIDO_STATUS
+
+        return context 
+
 class AdminPedidoListaView(AdminRequireMixin, ListView):
     template_name = "admin_paginas/adminpedidolista.html"
 
@@ -314,7 +321,29 @@ class AdminPedidoListaView(AdminRequireMixin, ListView):
     context_object_name = "todospedido"
 
 
+class AdminPedidoMudarStatusView(AdminRequireMixin, View):
+    def post(self, request, *args, **kwargs):
+        pedido_id = self.kwargs["pk"]
+        pedido_obj = Pedido_order.objects.get(id=pedido_id)
+        novo_status = request.POST.get("status")
+        pedido_obj.pedido_status = novo_status
+        pedido_obj.save()
+
+        return redirect(reverse_lazy("lojaapp:adminpedidodetalhe", kwargs={"pk" : self.kwargs["pk"]}))
     
+class PesquisarView(TemplateView):
+    template_name = "pesquisar.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        kw = self.request.GET.get("keyword")
+        results = Produto.objects.filter(
+            Q(titulo__icontains=kw) | Q(descricao__icontains=kw) | Q(return_devolucao__icontains=kw))
+        context["results"] = results
+
+        return context 
+
+
 
     
 

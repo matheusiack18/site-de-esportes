@@ -25,9 +25,12 @@
         <a class="btn btn-outline-success" href="{% url 'lojaapp:clienteregistrar' %}">LOGIN</a>    &nbsp   &nbsp   &nbsp 
         <a class="btn btn-outline-success" href="{% url 'lojaapp:clienteentrar' %}">ENTRAR</a>
         {% endif %}
-
-
-
+        <div class="float-right">
+            <form action="{% url 'lojaapp:pesquisar' %}" method="GET">
+                <input type="text" name="keyword" placeholder="Pesquisar Produto" required>
+                <button class="btn btn-outline-success pull-right">BUSCAR</button>
+            </form>
+        </div>
     </div>
     <hr>
     

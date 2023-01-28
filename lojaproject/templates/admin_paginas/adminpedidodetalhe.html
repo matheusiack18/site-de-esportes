@@ -46,6 +46,20 @@
                     </tr>
                 </tbody>
             </table>
+            <form action="{% url 'lojaapp:adminpedidomudar' pedido_obj.id %}" method="post">
+                {% csrf_token %}
+                <select name="status">
+                    {% for i, j in todosststus %}
+
+                    <option value="{{i}}"{% if i == pedido_obj.pedido_status%} selected{% endif %}>{{j}}</option>
+
+
+                    {% endfor %}
+                </select>
+                &nbsp
+                <button class="btn btn-outline-success">Salvar Alteração</button>
+
+            </form>
         </div>
     </div>
 </div>
