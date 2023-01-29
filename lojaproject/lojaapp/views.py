@@ -3,6 +3,7 @@ from django.views.generic import View,TemplateView, CreateView, FormView, Detail
 from django.urls import reverse_lazy
 from .forms import Checar_PedidoForm, ClienteRegistrarForm, ClienteEntrarForm
 from.models import *
+from django.core.paginator import Paginator
 from django.db.models import Q
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, logout, login
@@ -21,7 +22,11 @@ class HomeView(LojaMixin,TemplateView):
     template_name = "home.html"
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['produto_list'] = Produto.objects.all().order_by("id")
+        all_produtos = Produto.objects.all().order_by("id")
+        paginator = Paginator(all_produtos,6)
+        page_number = self.request.GET.get('page')
+        produto_list = paginator.get_page(page_number)
+        context['produto_list'] = produto_list
         return context
 
 class TodosProdutosView(LojaMixin,TemplateView):
