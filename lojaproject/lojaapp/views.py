@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.urls.base import reverse 
 from django.views.generic import View,TemplateView, CreateView, FormView, DetailView, ListView
 from django.urls import reverse_lazy
 from .forms import Checar_PedidoForm, ClienteRegistrarForm, ClienteEntrarForm
@@ -179,9 +180,23 @@ class CheckoutView(LojaMixin,CreateView):
             form.instance.total = carro_obj.total
             form.instance.pedido_status = "Pedido Recebido"
             del self.request.session['carro_id']
+            pm = form.cleaned_data.get("pagamento_method")
+            pedido = form.save()
+            if pm == "Khalti":
+                return redirect(reverse("lojaapp:pagamento") + "?o_id=" + str(pedido.id))
+                
         else:
             return redirect("lojaapp:home")
         return super().form_valid(form)
+    
+class PagamentoView(View):
+    def get(self, request, *args,**kwargs):
+        o_id = request.GET.get("o_id")
+        pedido = Pedido_order.objects.get(id=o_id)
+        context = {
+            "pedido":pedido
+        }
+        return render(request, "pagamento.html", context)
     
 class ClienteRegistrarView(CreateView):
     template_name = "clienteregistrar.html"

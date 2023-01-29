@@ -19,8 +19,9 @@
                 <div class="col-md-8">
                     <h4><a href="{% url 'lojaapp:produtodetalhe' result.slug %}">{{result.titulo}}</a></h4>
                     <p>{{result.descricao|truncatewords:50}}</p>
-                    <p class="text-danger">Politica Devoluçao{{result.return_devolucao}}<a href="{% url 'lojaapp:addcarro' result.id %}" class="btn btn-success">Comprar</a></p> 
-
+                    <p class="text-danger">Politica Devoluçao{{result.return_devolucao}}</p> 
+                    <a href="{% url 'lojaapp:addcarro' result.id %}" class="btn btn-success">Comprar</a>
+                    
                 </div>
                 {% endfor %}    
             </div>

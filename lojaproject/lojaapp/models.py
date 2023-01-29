@@ -67,6 +67,12 @@ PEDIDO_STATUS =(
     ("Pedido Completado","Pedido Completado"),
     ("Pedido Cancelado","Pedido Cancelado"),
 )
+
+METHOD = (
+    ("Dinheiro na Entrega","Dinheiro na Entrega"),
+    ("Khalti","Khalti"),
+
+)
 class Pedido_order(models.Model):
     carro = models.OneToOneField(Carro,on_delete=models.CASCADE)
     ordernando_por = models.CharField(max_length=200)
@@ -79,6 +85,8 @@ class Pedido_order(models.Model):
     total = models.PositiveIntegerField()
     pedido_status = models.CharField(max_length=50,choices=PEDIDO_STATUS)
     criado_em = models.DateTimeField(auto_now_add=True)
+    pagamento_method = models.CharField(max_length=20, choices=METHOD, default="Dinheiro na Entrega")
+    pagamento_completo = models.BooleanField(default=False,null=True,blank=True)
 
     def __str__(self) :
         return "Pedido_order:" + str(self.id)

@@ -22,22 +22,30 @@
     <nav aria-label="...">
         <ul class="pagination">
             {% if produto_list.has_previous %}
-            <li class="page-item disabled" >
-                <span class="page-link">Previous</span>
+
+            <li class="page-item" >
+                <a class="page-link" href="?page={{produto_list.previous_page_number}}">Anterior</a>
+            </li>
+            {% else %}
+            <li class="page-item">
+                <a class="page-link" href="#" tabindex="-1" aria-disabLed="true">Anterior</a>
             </li>
             {% endif %}
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item active">
-                <span class="page-link">
-                    2
-                    <span class="sr-only">(current)</span>    
-                    </span>
-                </span>
+            {% for i in produto_list.paginator.page_range %}
+            {% if i == produto_list.number %}
+            <li class="page-item active"><a class="page-link">{{i}}</a></li>
+            {% else %}
+            <li class="page-item"><a class="page-link" href="?page{{i}}">{{i}}</a></li>
+            {% endif %}
+            {% endfor %}
+
+            {% if produto_list.has_next %}
+            <li class="page-item"><a class="page-link" href="?page={{produto_list.next_page_number}}">Proximo</a></li>
+            {% else %}
+            <li class="page-item disabled">
+                <a class="page-link" href="#" tabindex="-1" aria-disabled="true" >Proximo</a>
             </li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item">
-                <a class="page-link" href="#">Next</a>
-            </li>
+            {% endif %}
         </ul>
     </nav>
 </div>   

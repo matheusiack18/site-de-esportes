@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 class Checar_PedidoForm(forms.ModelForm):
     class Meta:
         model = Pedido_order
-        fields = ["ordernando_por","endereco_envio","telefone","email"]
+        fields = ["ordernando_por","endereco_envio","telefone","email", "pagamento_method"]
 
 class ClienteRegistrarForm(forms.ModelForm):
     username = forms.CharField(widget=forms.TextInput())
