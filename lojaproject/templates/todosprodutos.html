@@ -6,12 +6,12 @@
 
 <div class="container">
     <h1 class="text-center">TODOS OS PRODUTOS DA CATEGORIA</h1>
-    <hr>
-    <br>
-    {% for cat in todoscategorias %}
 
-    <h1>{{cat.titulo}}</h1>
-    <div class="row mt-3">
+    {% for cat in todoscategorias %}
+    <hr>
+    <h1 class="text-center">{{cat.titulo}}</h1>
+    <hr>
+    <div class="row mt-3 card-subtitle">
         {% for p in cat.produto_set.all %}
 
         <div class="col-md-4">
