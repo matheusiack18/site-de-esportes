@@ -11,18 +11,19 @@
             <hr>
             {% for result in results %}
             <div class="row">
-                <div class="col-md-3">
-                    <img src="{{result.image.url}}" class="img-fluid" alt="">
+                <div class="col-md-3 card-body">
+                    <br><img src="{{result.image.url}}" class="img-fluid" alt=""> 
                 </div>
+                
 
 
-                <div class="col-md-8">
+                <div class="col-md-8 card-body"><br>
                     <h4><a href="{% url 'lojaapp:produtodetalhe' result.slug %}">{{result.titulo}}</a></h4>
                     <p>{{result.descricao|truncatewords:50}}</p>
                     <p class="text-danger">Politica Devoluçao{{result.return_devolucao}}</p> 
                     <a href="{% url 'lojaapp:addcarro' result.id %}" class="btn btn-success">Comprar</a>
-                    
                 </div>
+
                 {% endfor %}    
             </div>
 
