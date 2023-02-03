@@ -41,17 +41,20 @@
                 </a>
                 <div class="dropdown-menu" aria-LabeLLedby="navbarDropdown">
                     {% if request.user.cliente %}
-                   
-                    <a class="dropdown-item">Olá, {{request.user.username}}!</a>
                     
+                    <center>
+                    <a class="dropdown-item"><p style="color:blue;" >Olá, {{request.user.username}}! 🙂</p></a>
                     
-            
-                    <a class="dropdown-item" href="{% url 'lojaapp:clienteperfil'%}">MEU PERFIL</a>
-                    <a class="dropdown-item" href="{% url 'lojaapp:clientesair'%}">SAIR</a>
-            
+                    <a class="dropdown-item" href="{% url 'lojaapp:clienteperfil'%}" ><p style="color:forestgreen;">MEU PERFIL</p></a>
+                    
+                    <a class="dropdown-item" href="{% url 'lojaapp:clientesair'%}"><p style="color:red;">SAIR</p></a>
+                    </center>
+
                     {% else %}
-                    <a class="dropdown-item" href="{% url 'lojaapp:clienteregistrar' %}">CADASTRO</a>    
-                    <a class="dropdown-item" href="{% url 'lojaapp:clienteentrar' %}">ENTRAR</a>
+                    <center>
+                    <a class="dropdown-item" href="{% url 'lojaapp:clienteregistrar' %}"><p style="color:forestgreen;">CADASTRO</p></a>    
+                    <a class="dropdown-item" href="{% url 'lojaapp:clienteentrar' %}"><p style="color:forestgreen;">ENTRAR</p></a>
+                    </center>
                     {% endif %}
               </li>
             </div>
