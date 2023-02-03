@@ -13,12 +13,14 @@
     </div>
     <div class="col-md-6 text-left">
         <h3>{{produto.titulo}} <br>({{produto.visualizacao}} Visulizações)</h3>
+        <p></p>
         <h4>Categoria: {{produto.Categoria}}</h4>
-        <h5>De: <strike> R$ {{produto.preco_mercado}}</strike> <br>Por: R$ {{produto.venda}}</h5>
+        <p></p>
+        <h5>De: <strike> R$ {{produto.preco_mercado}}</strike><br><br>Por: R$ {{produto.venda}}</h5>
         <a href="{% url 'lojaapp:addcarro' produto.id %}" class="btn btn-success">Comprar</a><hr>
         <p class="text-danger">Garantia: {{produto.garantia}}</p>
-        <p class="text-danger">Politica Deboluçao: {{produto.return_devolucao}}</p><hr>
-        <p class="text-success">{{produto.descricao}}</p>
+        <p class="text-danger">Politica de Devolução: {{produto.return_devolucao}}</p><hr>
+        <p class="text-dark">{{produto.descricao}}</p>
 
     </div>
 </div>

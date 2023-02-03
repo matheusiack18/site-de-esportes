@@ -4,12 +4,20 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/4650/4650535.png">
+
     <title>{% block title%}{% endblock %}</title>
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-</head>
+  </head>
 <body style="background-color:aqua;">
     <nav class="navbar navbar-expand-lg navbar-dark badge-primary">
-        <a class="navbar-brand" href="{% url 'lojaapp:home' %}">LOJA ESPORTES</a>
+      
+
+        <a class="navbar-brand" href="{% url 'lojaapp:home' %}"><img stile="height:50; " width="50" src="https://cdn-icons-png.flaticon.com/512/4650/4650535.png" />  LOJA ESPORTES</a>
+
+
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -33,17 +41,20 @@
                 </a>
                 <div class="dropdown-menu" aria-LabeLLedby="navbarDropdown">
                     {% if request.user.cliente %}
-                   
-                    <a class="dropdown-item">Olá, {{request.user.username}}!</a>
                     
+                    <center>
+                    <a class="dropdown-item"><p style="color:blue;" >Olá, {{request.user.username}}! 🙂</p></a>
                     
-            
-                    <a class="dropdown-item" href="{% url 'lojaapp:clienteperfil'%}">MEU PERFIL</a>
-                    <a class="dropdown-item" href="{% url 'lojaapp:clientesair'%}">SAIR</a>
-            
+                    <a class="dropdown-item" href="{% url 'lojaapp:clienteperfil'%}" ><p style="color:forestgreen;">MEU PERFIL</p></a>
+                    
+                    <a class="dropdown-item" href="{% url 'lojaapp:clientesair'%}"><p style="color:red;">SAIR</p></a>
+                    </center>
+
                     {% else %}
-                    <a class="dropdown-item" href="{% url 'lojaapp:clienteregistrar' %}">CADASTRO</a>    
-                    <a class="dropdown-item" href="{% url 'lojaapp:clienteentrar' %}">ENTRAR</a>
+                    <center>
+                    <a class="dropdown-item" href="{% url 'lojaapp:clienteregistrar' %}"><p style="color:forestgreen;">CADASTRO</p></a>    
+                    <a class="dropdown-item" href="{% url 'lojaapp:clienteentrar' %}"><p style="color:forestgreen;">ENTRAR</p></a>
+                    </center>
                     {% endif %}
               </li>
             </div>
