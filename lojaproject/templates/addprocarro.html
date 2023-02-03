@@ -1,11 +1,16 @@
 {% extends 'base.html' %}
-{% block title%}Carrinho{% endblock %}
+{% block title%}CARRINHO{% endblock %}
 
 
 {% block content %}
 
 <div class="container">
-    produto adicionado no carrinho
+    <center>
+    <p>O PRODUTO FOI ADICIONADO NO CARRINHO</p><br>
+    <br><p>Se quiser ir para o carrinho, <a href="{%url 'lojaapp:meucarro' %}">clique aqui</a>🚗</p><br>
+    <br><p>Se quiser continuar comprando, <a href="{%url 'lojaapp:home' %}">clique aqui</a></p>
+
+    </center>
 
 </div>
 
