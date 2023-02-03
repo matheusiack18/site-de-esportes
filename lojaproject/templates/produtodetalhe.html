@@ -17,7 +17,7 @@
         <h5>De: <strike> R$ {{produto.preco_mercado}}</strike> <br>Por: R$ {{produto.venda}}</h5>
         <a href="{% url 'lojaapp:addcarro' produto.id %}" class="btn btn-success">Comprar</a><hr>
         <p class="text-danger">Garantia: {{produto.garantia}}</p>
-        <p class="text-danger">Politica Deboluçao: {{produto.return_devolucao}}</p><hr>
+        <p class="text-danger">Politica de Devolução: {{produto.return_devolucao}}</p><hr>
         <p class="text-success">{{produto.descricao}}</p>
 
     </div>
