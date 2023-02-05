@@ -3,26 +3,36 @@
 
 
 {% block content %}
+
 <style>
+
     .errorlist{
         color: blue;
         list-style: none;
     }
+
 </style>
-<div class="container">
-    <div class="row">
-        <div class="col-md-6 mx-auto">
-           <h3>Cadastrar Cliente</h3>
-           <form action="" method="POST">
-            {% csrf_token %}
-            {{form.as_p}}
-            <button class="btn-sm btn-success">Cadastrar Cliente</button>
+<div class="page">
 
-           </form>  
-           <br><p>Se você ja se cadastrou, <a href="{%url 'lojaapp:clienteentrar' %}">clique aqui</a></p>
-
+    <div class="mainContainer">
+    
+        <div class="containerInner">
+    
+            <h3>Cadastrar Cliente</h3>
+    
+            <form action="" method="POST" class="forms">
+                {% csrf_token %}
+                {{form.as_p}}
+                <button class="btn-neon">Cadastrar Cliente</button>
+    
+            </form>
+    
+            <br><p class="textToAlign">Se você ja se cadastrou, <a href="{%url 'lojaapp:clienteentrar' %}">clique aqui</a></p>
+        
         </div>
+    
     </div>
+
 </div>
 
 

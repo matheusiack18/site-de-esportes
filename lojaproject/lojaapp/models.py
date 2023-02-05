@@ -19,7 +19,6 @@ class Cliente(models.Model):
     def __str__(self) :
         return self.nome_completo
 
-
 class Categoria(models.Model):
     titulo = models.CharField(max_length=200)
     slug = models.SlugField(unique=True)
@@ -73,6 +72,7 @@ METHOD = (
     ("Khalti","Khalti"),
 
 )
+
 class Pedido_order(models.Model):
     carro = models.OneToOneField(Carro,on_delete=models.CASCADE)
     ordernando_por = models.CharField(max_length=200)
@@ -90,7 +90,3 @@ class Pedido_order(models.Model):
 
     def __str__(self) :
         return "Pedido_order:" + str(self.id)
-
-
-
-
