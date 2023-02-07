@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.humanize',
     'django.contrib.messages',
+    'livereload',
     'django.contrib.staticfiles',
     'lojaapp',
 ]
@@ -48,7 +49,8 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware'
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'livereload.middleware.LiveReloadScript',
 ]
 
 ROOT_URLCONF = 'lojaproject.urls'
@@ -115,7 +117,6 @@ USE_TZ = True
 
 
 
-
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [BASE_DIR / "static"] 
 STATIC_ROOT = BASE_DIR / "static_cdn"
@@ -123,5 +124,8 @@ MEDIA__URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
 
-
 #DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_FALE_CONOSCO = 'djangoproject.telp@gmail.com'

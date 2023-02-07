@@ -1,7 +1,7 @@
 from django import forms
 from.models import Pedido_order, Cliente
 from django.contrib.auth.models import User
-
+# from setings impot EMAIL_FALE_CONOSCO
 
 class Checar_PedidoForm(forms.ModelForm):
     class Meta:
@@ -26,3 +26,13 @@ class ClienteRegistrarForm(forms.ModelForm):
 class ClienteEntrarForm(forms.Form):
     username = forms.CharField(widget=forms.TextInput())
     password = forms.CharField(widget=forms.PasswordInput())
+
+class FaleConoscoForm(forms.Form):
+    Nome = forms.CharField(label = "Digite seu Nome")
+    email = forms.EmailField(label = "Digite seu email")
+    mensagem = forms.CharField(required=True, widget=forms.Textarea)
+
+    def enviar_mensagem_por_email():
+
+        EMAIL_FALE_CONOSCO
+        return
