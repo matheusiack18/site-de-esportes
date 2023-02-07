@@ -1,4 +1,4 @@
-from django.urls import path 
+from django.urls import path, include
 from.views import *
 
 
@@ -28,6 +28,7 @@ urlpatterns = [
     path("admin-todos-pedidos/", AdminPedidoListaView.as_view(), name="adminpedidolista"),
     path("admin-pedido-<int:pk>-mudar/", AdminPedidoMudarStatusView.as_view(), name="adminpedidomudar"),
     path("pesquisar/", PesquisarView.as_view(), name="pesquisar"),
+    path("faleconosco/", FaleConoscoView.as_view(), name = "faleconosco"),
 
 
 

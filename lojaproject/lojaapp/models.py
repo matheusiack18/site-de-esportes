@@ -90,3 +90,5 @@ class Pedido_order(models.Model):
 
     def __str__(self) :
         return "Pedido_order:" + str(self.id)
+
+    

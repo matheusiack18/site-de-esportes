@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title%}FALE CONOSCO{% endblock %}
+
+{% block content %}
+
+<style>
+
+    .errorlist{
+        color: blue;
+        list-style: none;
+    }
+
+</style>
+
+<div class="page fill-page">
+
+    <div class="mainContainer">
+    
+        <div class="containerInner">
+    
+            <h1 class="textToAlign cardTitle">FALE CONOSCO</h1>
+                        <br>
+            <p>Envie-nos uma mensagem, que teremos todo o prazer em atendê-lo(a).</p>
+
+            <form method=”POST” class="forms">
+            {% csrf_token %}
+            {{form.as_p}}
+            <button type=”submit” class="btn-neon">Enviar</button>
+
+            </form>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock content %}

@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.urls.base import reverse 
 from django.views.generic import View,TemplateView, CreateView, FormView, DetailView, ListView
 from django.urls import reverse_lazy
-from .forms import Checar_PedidoForm, ClienteRegistrarForm, ClienteEntrarForm
+from .forms import Checar_PedidoForm, ClienteRegistrarForm, ClienteEntrarForm, FaleConoscoForm
 from.models import *
 from django.core.paginator import Paginator
 from django.db.models import Q
@@ -363,11 +363,12 @@ class PesquisarView(TemplateView):
 
         return context 
 
+class FaleConoscoView(FormView):
+    template_name = 'faleconosco.html'
+    form_class = FaleConoscoForm
+    success_url = reverse_lazy("lojaapp:faleconosco")
 
+    def form_valid(self, form):
+        form.enviar_mensagem_por_email()
+        return super().form_valid(form)
 
-    
-
-
-
-
- 
