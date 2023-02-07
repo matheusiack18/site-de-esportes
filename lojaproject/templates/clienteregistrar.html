@@ -12,7 +12,7 @@
     }
 
 </style>
-<div class="page">
+<div class="page fill-page">
 
     <div class="mainContainer">
     
@@ -26,8 +26,8 @@
                 <button class="btn-neon">Cadastrar Cliente</button>
     
             </form>
-    
-            <br><p class="textToAlign">Se você ja se cadastrou, <a href="{%url 'lojaapp:clienteentrar' %}">clique aqui</a></p>
+            <br><p class="textToAlign">Se você ja se cadastrou</p>
+            <a href="{%url 'lojaapp:clienteentrar' %}{% if request.GET.next%}?next={{request.GET.next}}{% endif %}">👉🏻clique aqui👈🏻</a>
         
         </div>
     

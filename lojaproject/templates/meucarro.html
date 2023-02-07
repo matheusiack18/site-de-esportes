@@ -4,52 +4,78 @@
 
 {% block content %}
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-10">
-            <h4>ITENS DO CARRINHO</h4>
-            <table class= 'table'>
-                <thead>
-                        <tr>
-                            <th>Codigo</th>
-                            <th>Produto</th>
-                            <th>Avaliacao</th>
-                            <th>Quantidade</th>
-                            <th>Subtotal</th>
-                            <th>Ação</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for cp in carro.carroproduto_set.all %}
-                        <tr>
-                            <td>{{forloop.counter}}</td>
-                            <td>{{cp.produto.titulo}}</td>
-                            <td>{{cp.avaliacao}}</td>
-                            <td>{{cp.quantidade}}</td>
-                            <td>{{cp.subtotal}}</td>
-                            <td>
-                                <a href="{% url 'lojaapp:manipularcarro' cp.id %}?acao=inc" class="btn btn-success"> + </a>
-                                <a href="{% url 'lojaapp:manipularcarro' cp.id %}?acao=dcr" class="btn btn-warning"> - </a>
-                                <a href="{% url 'lojaapp:manipularcarro' cp.id %}?acao=rmv" class="btn btn-danger"> x </a>
-                            </td>
-                        </tr>
-                        {% endfor %}
-                        <tr>
-                            <th colspan="4" class="text-right">Total:</th>
-                            <th>R$ {{carro.total}}</th>
-                            {% if carro.carroproduto_set.all  %}
-                            <th><a href="{% url 'lojaapp:limparcarro' %}" class="btn btn-warning"> Limpar Carrinho </a></th>
-                            {% endif %}
-                        </tr>
+<div class="page fill-page">
+
+    <div class="tableBox">
+        
+        <h4 class="cardTitle">Itens do Carrinho</h4>
+        <table class="tableCar">
+            <thead>
+                <tr class="trTable">
+                    <th>Codigo</th>
+                    <th>Produto</th>
+                    <th>Avaliacao</th>
+                    <th>Quantidade</th>
+                    <th>Subtotal</th>
+                    <th>Ação</th>
+                </tr>
+            </thead>
+                <tbody>
+                    {% for cp in carro.carroproduto_set.all %}
+                    <tr class="trTable">
+                        <td>{{forloop.counter}}</td>
+                        <td>{{cp.produto.titulo}}</td>
+                        <td>{{cp.avaliacao}}</td>
+                        <td>{{cp.quantidade}}</td>
+                        <td>{{cp.subtotal}}</td>
+                        <td class="buyBtnTable">
+                            <a class="buyBtn btnCancel" href="{% url 'lojaapp:manipularcarro' cp.id %}?acao=rmv">remover</a>
+                            
+                            <a class="buyBtn btnMinus" href="{% url 'lojaapp:manipularcarro' cp.id %}?acao=dcr">
+                                <svg class="svgBtn">
+                                    <line 
+                                        x1="0" y1="50%" 
+                                        x2="100%" y2="50%"
+                                    />
+                                </svg>    
+                            </a>
+
+                            <a class="buyBtn btnPlus" href="{% url 'lojaapp:manipularcarro' cp.id %}?acao=inc">
+                                <svg class="svgBtn">
+                                    <line 
+                                        x1="50%" y1="0" 
+                                        x2="50%" y2="100%" 
+                                    />
+                                
+                                    <line 
+                                        x1="0" y1="50%" 
+                                        x2="100%" y2="50%" 
+                                    />
+                                </svg>    
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+
+                    <tr class="totalRow">
+                        <th colspan="3"></th>
+                        <th>Total:</th>
+                        <th>R$ {{carro.total}}</th>
                         {% if carro.carroproduto_set.all  %}
-                        <tr>
-                            <th><a href="{% url 'lojaapp:checkout' %}" class="btn btn-success"> Processar Compra </a></th>
-                        </tr>
+                        <th><a class="btn-neon" href="{% url 'lojaapp:limparcarro' %}"> Limpar Carrinho </a></>
                         {% endif %}
-                    </tbody>    
-            </table>
-        </div>
+                    </tr>
+                    
+                    
+                    {% if carro.carroproduto_set.all  %}
+                    <tr>
+                        <th style="border: 0"><a class="btn-neon" href="{% url 'lojaapp:checkout' %}"> Processar Compra </a></th>
+                    </tr>
+                    {% endif %}
+                </tbody>    
+        </table>
     </div>
+
 </div>
 
 
