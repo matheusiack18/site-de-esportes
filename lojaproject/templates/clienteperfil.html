@@ -3,27 +3,23 @@
 
 
 {% block content %}
-<div class="container">
-    <div class="row">
-        <div class="col-md-4">
-           <h3>DETALHES DO CLIENTE: </h3>
+<div class="page fill-page">
+    <div class="divBySide">
+        <div class="side">
+           <h3 style="margin: 3.9em 0 1em 0;" class="cardTitle">DETALHES DO CLIENTE: </h3>
            <p><span class="font-weight-bold">Nome: </span>{{cliente.nome_completo}}</p> 
            <p><span class="font-weight-bold">Usuario: </span>{{cliente.user.username}}</p> 
            <p><span class="font-weight-bold">Email: </span>{{cliente.user.email}}</p> 
            <p><span class="font-weight-bold">Endereço: </span>{{cliente.endereco}}</p> 
            <p><span class="font-weight-bold">Cadastrado em: </span>{{cliente.data_on}}</p> 
-
-
-
-
-
         </div>
-        <div class="col-md-8">
-            <h3>Compras Anteriores</h3>
+
+        <div class="side">
+            <h3 class="cardTitle">Compras Anteriores</h3>
             <br>
-            <table class="table">
+            <table class="tableCar">
                 <thead>
-                    <tr>
+                    <tr class="trTable">
                         <th>Codigo</th>
                         <th>Pedido ID</th>
                         <th>Valor</th>
@@ -33,10 +29,10 @@
                 </thead>
                 <tbody>
                     {% for pedidos in pedidos %}
-                    <tr>
+                    <tr class="trTable">
                         <td>{{forloop.counter}}</td>
 
-                        <td><a href="{% url 'lojaapp:clientepedidodetalhe' pedidos.pk%}"> Pedido N°: {{pedidos.id}}</td></a>
+                        <td><a class="cardTitle" href="{% url 'lojaapp:clientepedidodetalhe' pedidos.pk%}"> Pedido N°: {{pedidos.id}}</td></a>
                         <td>{{pedidos.total}}</td>
                         <td>{{pedidos.criado_em}}</td>
                         <td>{{pedidos.pedido_status}}</td>

@@ -1,26 +1,8 @@
 [ ] base na navbar
 
-[ ] cliente pedudidetalhe
-
-[ ] cliente perfil
-
-[ ] fale conosco
-
 [ ] pesquisar
 
-[ ] processar
+[ ] pagamento.html
+
 
 [] colocar a imagem no carrinho
-
-
-é só rodar esse comando junto com o 
-python manage.py runserver
-python manage.py livereload
-
-1 em cada terminal
-
-mas lembra de ligar a venv ne kkk
-blz kkkk
-
-vlw
-vlw
