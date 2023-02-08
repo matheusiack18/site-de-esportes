@@ -25,7 +25,7 @@
                     {% for cp in carro.carroproduto_set.all %}
                     
                     <tr class="trTable">
-                        <td><img  src="{{cp.produto.imageURL}}" alt="img-missing"></td>
+                        <td><img style="width: 3.5em;height: 3.5em;" src="{{cp.produto.imageURL}}" alt="img-missing"></td>
                         <td>{{forloop.counter}}</td>
                         <td>{{cp.produto.titulo}}</td>
                         <td>{{cp.avaliacao}}</td>
