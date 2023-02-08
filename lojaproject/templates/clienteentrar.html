@@ -23,7 +23,8 @@
             {% endif %}
     
             </form>  
-            <br><p>Se você não esta cadastrado, <a href="{%url 'lojaapp:clienteregistrar' %}{% if request.GET.next%}?next={{request.GET.next}}{% endif %}">clique aqui</a></p>
+            <br><p class="textToAlign">Se você não está cadastrado</p>
+            <a href="{%url 'lojaapp:clienteregistrar' %}{% if request.GET.next%}?next={{request.GET.next}}{% endif %}">👉🏻clique aqui👈🏻</a>
         </div>
     </div>
 </div>

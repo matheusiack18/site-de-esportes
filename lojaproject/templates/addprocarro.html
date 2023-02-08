@@ -1,17 +1,124 @@
 {% extends 'base.html' %}
 {% block title%}CARRINHO{% endblock %}
+{% load static %}
 
 
 {% block content %}
 
-<div class="container">
-    <center>
-    <p>O PRODUTO FOI ADICIONADO NO CARRINHO</p><br>
-    <br><p>Se quiser ir para o carrinho, <a href="{%url 'lojaapp:meucarro' %}">clique aqui</a>🚗</p><br>
-    <br><p>Se quiser continuar comprando, <a href="{%url 'lojaapp:home' %}">clique aqui</a>🏠</p>
 
-    </center>
+<div style="font-size: x-large;" class="page fill-page">
+
+    <div class="verticalAlign">
+
+        <div class="centerInColumn">
+
+            <p class="textToAlign cardTitle">O produto foi adicionado no carrinho</p><br>
+        <br><a class="btnFillContent" href="{%url 'lojaapp:meucarro' %}">Carrinho
+                <svg
+                    class="svgNeon" 
+                    fill="none" 
+                    height="27" 
+                    viewBox="0 0 30 27" 
+                    width="30" 
+                    xmlns="http://www.w3.org/2000/svg">
+    
+                        <path 
+                            d="M1.39999 1.70001H6.60001" 
+                            stroke-linecap="round" 
+                            stroke-miterlimit="10" 
+                            stroke-width="2"
+                            
+                        />
+    
+                        <path 
+                            d="M6.60001 1.70001L11 18.9"
+                            stroke-linecap="round" 
+                            stroke-miterlimit="10" 
+                            stroke-width="2"
+                        />
+    
+                        <path 
+                            d="M11.8 18.9H28.3" 
+                            stroke-linecap="round" 
+                            stroke-miterlimit="10" 
+                            stroke-width="2"
+                        />
+    
+                            <path 
+                            d="M13.8 25.7C15.4569 
+                                25.7 16.8 24.3569 16.8 22.7C16.8 21.0432 15.4569 
+                                19.7 13.8 19.7C12.1431 19.7 10.8 21.0432 
+                                10.8 22.7C10.8 24.3569 12.1431 25.7 13.8 25.7Z" 
+                            stroke-linecap="round"
+                            stroke-miterlimit="10" 
+                            stroke-width="2"/>
+    
+                        <path 
+                            d="M25.3 25.7C26.9568 25.7 28.3 24.3569 
+                                28.3 22.7C28.3 21.0432 26.9568 19.7 
+                                25.3 19.7C23.6431 19.7 22.3 21.0432 22.3 22.7C22.3 
+                                24.3569 23.6431 25.7 25.3 25.7Z" 
+                            stroke-linecap="round" 
+                            stroke-miterlimit="10"
+                            stroke-width="2"
+                        />
+                        
+                        <path 
+                            d="M25.7 14.6H11.3C10.7 14.6 10.1 14.2 10 13.6L8.1 6.90001C7.9 6.00001 8.49999
+                                5.20001 9.39999 5.20001H27.5C28.4 5.20001 29.1 6.10001 
+                                28.8 6.90001L26.9 13.6C26.9 14.2 26.4 14.6 25.7 14.6Z"
+                            stroke-linecap="round" 
+                            stroke-miterlimit="10" 
+                            stroke-width="2"
+                        />
+                </svg>
+            </a>
+        <br><a class="btnFillContent"href="{%url 'lojaapp:home' %}">Continuar comprando
+            <?xml version='1.0' encoding='iso-8859-1'?>
+            <svg
+                class="svgNeon" 
+                version="1.1" 
+                xmlns="http://www.w3.org/2000/svg" 
+                viewBox="0 0 59.994 59.994" 
+                xmlns:xlink="http://www.w3.org/1999/xlink" 
+                enable-background="new 0 0 59.994 59.994">
+                
+                <g>
+                    <g>
+                        <path 
+                            d="m51.981,33.502c-0.552,0-1,0.448-1,
+                            1v19h-22v-15c0-0.552-0.448-1-1-1h-10c-0.552,0-1,
+                            0.448-1,1v15h-8v-19c0-0.552-0.448-1-1-1-0.552,0-1,0.448-1,1v20c0,0.552 0.448,
+                            1 1,1h10c0.552,0 1-0.448 1-1v-15h8v15c0,0.552 0.448,1 1,1h24c0.552,
+                            0 1-0.448 1-1v-20c0-0.552-0.447-1-1-1zm7.723,
+                            .291l-9.723-9.723v-11.568c0-0.552-0.448-1-1-1h-6c-0.552,0-1,0.448-1,1 0,
+                            0.552 0.448,1 1,
+                            1h5v8.568l-17.25-17.25c-0.011-0.012-0.015-0.029-0.027-0.041-0.195-0.195-0.451-0.291-0.707-0.289-0.256-0.002-0.512,
+                            0.094-0.707,0.289-0.012,0.012-0.016,0.028-0.027,0.041l-28.973,
+                            28.973c-0.387,0.387-0.387,1.014 8.32667e-16,1.401 0.387,0.387 1.014,
+                            0.387 1.401,0l28.306-28.306 18.186,18.186c0.064,0.089 0.138,0.164 0.227,
+                            0.227l9.893,9.893c0.387,0.387 1.014,0.387 1.401,
+                            0 0.387-0.387 0.387-1.014 0-1.401z"
+                        />
+                    </g>
+                </g>
+                <g>
+                    <g>
+                        <path 
+                            d="m41.981,37.502h-8c-0.552,0-1,0.448-1,
+                            1v8c0,0.552 0.448,1 1,1h8c0.552,0 1-0.448 
+                            1-1v-8c0-0.552-0.447-1-1-1zm-1,8h-6v-6h6v6z"
+                        />
+                    </g>
+                </g>
+            </svg>
+            </a>
+
+        </div>
+        
+    </div>
 
 </div>
+
 
 {% endblock content %}

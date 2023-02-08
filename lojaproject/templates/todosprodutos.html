@@ -21,7 +21,9 @@
                 <div class="cardBox">
                     <h4 class="textToAlign cardTitle"><a class="textToAlign cardTitle" href="{% url 'lojaapp:produtodetalhe' p.slug %}"> {{p.titulo}} </a></h4>  
                     <center>
-                    <img src="{{p.image.url}}" alt="" class="img-fluid" stile="height: 200; object-fit: contain;" width="200">
+                    <a href="{% url 'lojaapp:produtodetalhe' p.slug %}">
+                        <img src="{{p.image.url}}" alt="" class="img-fluid" stile="height: 200; object-fit: contain;" width="200">
+                    </a>
                     </center> 
                     <p class="mt-3">De: <strike> R$ {{p.preco_mercado}}</strike> <br>Por: R$ {{p.venda}}</p>
                     <a href="{% url 'lojaapp:addcarro' p.id %}" class="btn-neon">Comprar</a>

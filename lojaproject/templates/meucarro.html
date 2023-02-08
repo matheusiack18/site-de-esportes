@@ -8,30 +8,31 @@
 
     <div class="tableBox">
         
-        <h4 class="cardTitle">Itens do Carrinho</h4>
+        <h4 class="cardTitle">ITENS DO CARRINHO</h4>
         <table class="tableCar">
             <thead>
                 <tr class="trTable">
-                    <th>Codigo</th>
-                    <th>Produto</th>
-                    <th>Avaliacao</th>
-                    <th>Quantidade</th>
-                    <th>Subtotal</th>
-                    <th>Ação</th>
+                    <th>CÓDIGO</th>
+                    <th>PRODUTO</th>
+                    <th>PREÇO UNI.</th>
+                    <th>QUANTIDADE</th>
+                    <th>SUBTOTAL</th>
+                    <th>AÇÃO</th>
                 </tr>
             </thead>
                 <tbody>
                     {% for cp in carro.carroproduto_set.all %}
                     <tr class="trTable">
+                        <img id="div_foto_ZjJkNDE1YzJhYzA2YWNmYmIxZTFkZTYxMDU5NzQ0YTI2M2UyZjlmYzg5YTcx" src="{{p.image.url}}" class="img-responsive">
                         <td>{{forloop.counter}}</td>
                         <td>{{cp.produto.titulo}}</td>
                         <td>{{cp.avaliacao}}</td>
                         <td>{{cp.quantidade}}</td>
                         <td>{{cp.subtotal}}</td>
                         <td class="buyBtnTable">
-                            <a class="buyBtn btnCancel" href="{% url 'lojaapp:manipularcarro' cp.id %}?acao=rmv">remover</a>
+                            <a class="btnFillContent btnCancel" href="{% url 'lojaapp:manipularcarro' cp.id %}?acao=rmv">remover</a>
                             
-                            <a class="buyBtn btnMinus" href="{% url 'lojaapp:manipularcarro' cp.id %}?acao=dcr">
+                            <a class="btnFillContent btnMinus" href="{% url 'lojaapp:manipularcarro' cp.id %}?acao=dcr">
                                 <svg class="svgBtn">
                                     <line 
                                         x1="0" y1="50%" 
@@ -40,7 +41,7 @@
                                 </svg>    
                             </a>
 
-                            <a class="buyBtn btnPlus" href="{% url 'lojaapp:manipularcarro' cp.id %}?acao=inc">
+                            <a class="btnFillContent btnPlus" href="{% url 'lojaapp:manipularcarro' cp.id %}?acao=inc">
                                 <svg class="svgBtn">
                                     <line 
                                         x1="50%" y1="0" 
@@ -69,7 +70,15 @@
                     
                     {% if carro.carroproduto_set.all  %}
                     <tr>
-                        <th style="border: 0"><a class="btn-neon" href="{% url 'lojaapp:checkout' %}"> Processar Compra </a></th>
+                        <th>
+                            <a class="focusBtn" href="{% url 'lojaapp:checkout' %}"> 
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                PROCESSAR COMPRA 
+                            </a>
+                        </th>
                     </tr>
                     {% endif %}
                 </tbody>    
