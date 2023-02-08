@@ -23,7 +23,16 @@
                 <tbody>
                     {% for cp in carro.carroproduto_set.all %}
                     <tr class="trTable">
-                        <img id="div_foto_ZjJkNDE1YzJhYzA2YWNmYmIxZTFkZTYxMDU5NzQ0YTI2M2UyZjlmYzg5YTcx" src="{{p.image.url}}" class="img-responsive">
+                        <div class=”col-md-6 text-right”>
+                            <img src=”{% if produto.imagem %}
+                            {{ produto.imagem.url }}
+                            {% else %}
+                            {% static
+                            ‘img/default.jpg’ %}
+                            {% endif %}”
+                            alt=”Imagem de {{ produto.nome }}”
+                            style=”height: 170px; width: auto” >
+                            </div>
                         <td>{{forloop.counter}}</td>
                         <td>{{cp.produto.titulo}}</td>
                         <td>{{cp.avaliacao}}</td>
@@ -63,7 +72,7 @@
                         <th>Total:</th>
                         <th>R$ {{carro.total}}</th>
                         {% if carro.carroproduto_set.all  %}
-                        <th><a class="btn-neon" href="{% url 'lojaapp:limparcarro' %}"> Limpar Carrinho </a></>
+                        <th><a class="btn-neon" href="{% url 'lojaapp:limparcarro' %}"> Limpar Carrinho </a></th>
                         {% endif %}
                     </tr>
                     

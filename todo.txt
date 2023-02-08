@@ -1,11 +1,8 @@
 [ ] base na navbar
 
-[ ] cliente pedudidetalhe
-
-[ ] cliente perfil
-
-[ ] fale conosco
-
 [ ] pesquisar
 
-[ ] processar
+[ ] pagamento.html
+
+
+[] colocar a imagem no carrinho

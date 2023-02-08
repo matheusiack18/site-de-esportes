@@ -102,17 +102,14 @@ background: linear-gradient(190deg, rgba(29,30,30,1) 46%, rgba(25,62,62,1) 70%, 
     background: transparent;
     color: var(--light-color);
 
-    font-size: 16px;
     margin-bottom: 30px;
     border: none;
     outline: none;
-    border-bottom: 1px solid var(--light-color);
 
 
     /* Testes */
 
     border-bottom: 2px solid var(--light-gray-color);
-    /* outline: 0; */
     font-size: 17px;
     color: #fff;
     padding: 7px 0;
@@ -123,13 +120,54 @@ background: linear-gradient(190deg, rgba(29,30,30,1) 46%, rgba(25,62,62,1) 70%, 
 
 }
 
+.forms p textarea {
+    
+    width: 15em;
 
+    background: transparent;
+    color: var(--light-color);
+    outline: none;
+
+    margin-bottom: 30px;
+    border-bottom: 4px solid var(--light-gray-color);
+    
+    font-size: 17px;
+    color: #fff;
+    padding: 7px 0;
+    transition: border-color 0.2s;
+}
+
+.forms p select {
+    background-color: var(--clr-bg);
+    color: var(--clr-neon);
+    outline: none;
+}
+
+.forms p select option {
+    background-color: var(--clr-bg);
+    color: var(--clr-neon);
+}
+
+.forms p select:hover {
+    background-color: var(--clr-neon);
+    color: var(--clr-bg);
+    cursor: pointer;
+    
+}
+.forms p select option:hover {
+    background-color: var(--clr-neon);
+    color: var(--clr-bg);
+    cursor: pointer;
+}
 
 /* .forms p input::placeholder {
     color: transparent;
 } */
 
-
+.forms p textarea:focus{
+    border-image: linear-gradient(to right, #116399, #38caef);
+    border-image-slice: 1;
+}
 
 .forms p input:focus{
     border-image: linear-gradient(to right, #116399, #38caef);
@@ -144,7 +182,6 @@ background: linear-gradient(190deg, rgba(29,30,30,1) 46%, rgba(25,62,62,1) 70%, 
 
     width: 100%;
     height: 100%;
-
 }
 
 .fill-page {
@@ -427,6 +464,8 @@ background: linear-gradient(190deg, rgba(29,30,30,1) 46%, rgba(25,62,62,1) 70%, 
 
 .tableCar td {
   text-align:center;
+
+  padding: 1em;
   
   /* border-top: 1px solid var(--clr-neon);
   border-bottom: 1px solid var(--clr-neon); */
@@ -507,8 +546,6 @@ background: linear-gradient(190deg, rgba(29,30,30,1) 46%, rgba(25,62,62,1) 70%, 
   justify-content: space-between;
 }
 
-
-
 .focusBtn{
     position: relative;
     display: inline-block;
@@ -519,8 +556,7 @@ background: linear-gradient(190deg, rgba(29,30,30,1) 46%, rgba(25,62,62,1) 70%, 
     transition: 0.5s;
     letter-spacing: 2px;
     overflow: hidden;
-
-   
+    background-color: var(--clr-bg);
 }
 
 .focusBtn:hover{
@@ -643,6 +679,12 @@ background: linear-gradient(190deg, rgba(29,30,30,1) 46%, rgba(25,62,62,1) 70%, 
 .verticalAlign {
     display: flex;
     align-items: center;
+}
+
+
+form p textarea {
+    background-color: var(--clr-bg);
+    color: var(--clr-neon);
 }
 
 
