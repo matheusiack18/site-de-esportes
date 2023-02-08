@@ -9,6 +9,13 @@ from django.db.models import Q
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, logout, login
 
+#TemplateView: é uma classe, não uma função, então apontamos a URL para o método de classe as_view(), que fornece uma entrada semelhante a uma função para visualizações baseadas em classe;
+#FormView: Permite exibir um formulário;
+#CreateView: Uma visão que exibe um formulário para criar um objeto, exibindo novamente o formulário com erros de validação (se houver) e salvando o objeto;
+#DetailView: Serve para mostrar um só objeto;
+#ListView: Usada para exibir uma lista de objetos;
+
+
 class LojaMixin(object):
     def dispatch(self, request,*args,**kwargs):
         carro_id = request.session.get("carro_id")
@@ -136,6 +143,7 @@ class LimparCarroView(LojaMixin,View):
 
 class MeuCarroView(LojaMixin,TemplateView):
     template_name = "meucarro.html"
+    
     def get_context_data(self, **kwargs):
         context =super().get_context_data(**kwargs)
         carro_id = self.request.session.get("carro_id",None)
@@ -145,7 +153,6 @@ class MeuCarroView(LojaMixin,TemplateView):
             carro_obj = None
         context['carro'] = carro_obj
         return context
-
 
 class CheckoutView(LojaMixin,CreateView):
     template_name = "processar.html"
@@ -247,7 +254,6 @@ class ClienteEntrarView(FormView):
         else:
             return self.success_url
  
-    
 class SobreView(LojaMixin,TemplateView):
     template_name = "sobre.html"
 
@@ -371,4 +377,3 @@ class FaleConoscoView(FormView):
     def form_valid(self, form):
         form.enviar_mensagem_por_email()
         return super().form_valid(form)
-

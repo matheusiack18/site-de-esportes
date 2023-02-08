@@ -1,6 +1,19 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+# on_delete=models.CASCADE (valor default): Quando um registro é excluído do banco, todos os registros associados na tabela relacionada são excluídos também.
+
+# on_delete=models.PROTECT: Se houver qualquer tentativa de excluir um registro de uma tabela e este possuir registros associados em outra tabela, a operação não será realizada, levantando uma exceção IntegrityError.
+
+# on_delete=models.SET_NULL: Se um registro for excluído, os campos que apontavam para ele nas tabelas relacionadas serão preenchidos com o valor NULL (o equivalente, em bancos de dados relacionais, ao None do Python). Essa opção não costuma ser usada com muita frequência, porque gera registros órfãos1 no banco de dados e, além disso, só funciona se o campo possuir propriedade null=True.
+
+# on_delete=models.SET_DEFAULT: Se um registro for excluído, os campos que apontavam para ele nas tabelas relacionadas serão preenchidos com o seu valor default. Essa opção só funciona se o campo tiver um valor definido para a propriedade default.
+
+# on_delete=models.SET: Se um registro for excluído, os campos que apontavam para ele nas tabelas relacionadas serão preenchidos por meio de uma função, passada como parâmetro. Por exemplo: on_delete=models.SET(retorna_cliente_vazio) instruirá o framework a chamar o método retorna_retorna_cliente_vazio() para atribuir um valor ao campo. Em geral, essa estratégia é usada quando seu sistema não exclui nenhum 
+#registro, apenas marca-os com um valor especial que significa “excluído” para o projeto. Você encontrará esse tipo de código em aplicações que lidam com dados sensíveis e não podem perder nenhum trecho de informação, mesmo que isso signifique investir em infraestrutura para armazenar anos de dados que não serão mais acessados.
+
+# on_delete=models.DO_NOTHING: Não faz nada para garantir a integridade dos dados se um registro for excluído. É considerada uma má prática devido ao seu potencial de gerar registros órfãos. Além disso, se o mecanismo do seu banco de dados implementar algum controle de registros órfãos, poderão ocorrer erros originados no SGBD.
+
 class Admin(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE) 
     nome_completo = models.CharField(max_length=200)
@@ -40,6 +53,14 @@ class Produto(models.Model):
 
     def __str__(self) :
         return self.titulo
+        
+    @property
+    def imageURL(self):
+        try:
+            url = self.image.url
+        except:
+            url = ''
+        return url
 
 class Carro(models.Model):
     cliente = models.ForeignKey(Cliente,on_delete=models.SET_NULL,null=True,blank=True) 
