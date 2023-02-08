@@ -25,7 +25,7 @@
                 <h4 class="cardTitle">Categoria: {{produto.Categoria}}</h4>
                 <p></p>
                 <h5>De: <strike> R$ {{produto.preco_mercado}}</strike><br><br>Por: R$ {{produto.venda}}</h5>
-                <a style="max-width: 7em;"href="{% url 'lojaapp:addcarro' produto.id %}" class="btnFillContent">Comprar</a><hr>
+                <a style="max-width: 7em;" href="{% url 'lojaapp:addcarro' produto.id %}" class="btnFillContent">Comprar</a><hr>
                 <p class="text-danger">Garantia: {{produto.garantia}}</p>
                 <p class="text-danger">Politica de Devolução: {{produto.return_devolucao}}</p><hr>
                 <p>{{produto.descricao}}</p>

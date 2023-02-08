@@ -12,6 +12,7 @@
         <table class="tableCar">
             <thead>
                 <tr class="trTable">
+                    <th>IMAGEM</th>
                     <th>CÓDIGO</th>
                     <th>PRODUTO</th>
                     <th>PREÇO UNI.</th>
@@ -22,17 +23,9 @@
             </thead>
                 <tbody>
                     {% for cp in carro.carroproduto_set.all %}
+                    
                     <tr class="trTable">
-                        <div class=”col-md-6 text-right”>
-                            <img src=”{% if produto.imagem %}
-                            {{ produto.imagem.url }}
-                            {% else %}
-                            {% static
-                            ‘img/default.jpg’ %}
-                            {% endif %}”
-                            alt=”Imagem de {{ produto.nome }}”
-                            style=”height: 170px; width: auto” >
-                            </div>
+                        <td><img  src="{{cp.produto.imageURL}}" alt="img-missing"></td>
                         <td>{{forloop.counter}}</td>
                         <td>{{cp.produto.titulo}}</td>
                         <td>{{cp.avaliacao}}</td>

@@ -4,7 +4,7 @@
 
 {% block content %}
 
-<div class="page">
+<div class="page fill-page">
     
     <h1 class="textToAlign cardTitle">PRINCIPAIS PRODUTOS</h1>
     <hr>
@@ -16,6 +16,7 @@
             <div class="cardBox">
                 <h4 class="textToAlign"><a class="textToAlign cardTitle" href="{% url 'lojaapp:produtodetalhe' p.slug %}"> {{p.titulo}} </a></h4>  
                 <center>
+
                     <a href="{% url 'lojaapp:produtodetalhe' p.slug %}">
                         <img src="{{p.image.url}}" alt="" class="">
                     </a>

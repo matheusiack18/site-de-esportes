@@ -1,8 +1,3 @@
 [ ] base na navbar
 
-[ ] pesquisar
-
-[ ] pagamento.html
-
-
-[] colocar a imagem no carrinho
+[x] pesquisar
