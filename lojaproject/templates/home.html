@@ -1,85 +1,82 @@
 {% extends 'base.html' %}
-{% block title%}Página Principal{% endblock %}
+{% block title%}PAGINA INICIAL{% endblock %}
 
 
 {% block content %}
 
 <div class="page">
-    <!-- <div class="pageContainer"> -->
-        <h1 class="textToAlign cardTitle">PRINCIPAIS PRODUTOS</h1>
-        <hr>
-        
-        <div class="rowBy3">
-            {% for p in produto_list %}
+    
+    <h1 class="textToAlign cardTitle">PRINCIPAIS PRODUTOS</h1>
+    <hr>
+    
+    <div class="rowBy3">
+        {% for p in produto_list %}
 
-            <div class="cardBoxOuter">
-                <div class="cardBox">
-                    <h4 class="textToAlign"><a class="textToAlign cardTitle" href="{% url 'lojaapp:produtodetalhe' p.slug %}"> {{p.titulo}} </a></h4>  
-                    <center>
-                        <a href="{% url 'lojaapp:produtodetalhe' p.slug %}">
-                            <img src="{{p.image.url}}" alt="" class="">
-                        </a>
-                    </center> 
-                    <p class="mt-3">De: <strike> R$ {{p.preco_mercado}}</strike> <br>Por: R$ {{p.venda}}</p>
-                    <button class="btn-neon">
-                        <a href="{% url 'lojaapp:addcarro' p.id %}" >Comprar</a>
-                    </button>
-                </div>  
-            </div>
+        <div class="cardBoxOuter">
+            <div class="cardBox">
+                <h4 class="textToAlign"><a class="textToAlign cardTitle" href="{% url 'lojaapp:produtodetalhe' p.slug %}"> {{p.titulo}} </a></h4>  
+                <center>
+                    <a href="{% url 'lojaapp:produtodetalhe' p.slug %}">
+                        <img src="{{p.image.url}}" alt="" class="">
+                    </a>
+                </center> 
+                <p class="mt-3">De: <strike> R$ {{p.preco_mercado}}</strike> <br>Por: R$ {{p.venda}}</p>
+                <a class="btn-neon" href="{% url 'lojaapp:addcarro' p.id %}" >Comprar</a>
 
-            {% endfor %}
+            </div>  
         </div>
-    
-        <br><nav >
-            <ul class="ulPageSelectorFooter">
 
-                {% if produto_list.has_previous %}
-    
-                <li class="">
-                    <a class="prev-nextFooterBar" href="?page={{produto_list.previous_page_number}}">Anterior</a>
-                </li>
+        {% endfor %}
+    </div>
 
-                {% else %}
+    <br><nav >
+        <ul class="ulPageSelectorFooter">
 
-                <li class="">
-                    <a class="prev-nextFooterBar" href="#" tabindex="-1" aria-disabLed="true">Anterior</a>
-                </li>
+            {% if produto_list.has_previous %}
 
-                {% endif %}
+            <li class="">
+                <a class="prev-nextFooterBar" href="?page={{produto_list.previous_page_number}}">Anterior</a>
+            </li>
 
-                {% for i in produto_list.paginator.page_range %}
+            {% else %}
 
-                {% if i == produto_list.number %}
+            <li class="">
+                <a class="prev-nextFooterBar" href="#" tabindex="-1" aria-disabLed="true">Anterior</a>
+            </li>
 
-                <li class="">
-                    <a class="activePageSelectorFooter" style="color: var(--clr-bg);">{{i}}</a>
-                </li>
+            {% endif %}
 
-                {% else %}
+            {% for i in produto_list.paginator.page_range %}
 
-                <li class="">
-                    <a class="pageSelectorFooter" href="?page{{i}}">{{i}}</a>
-                </li>
+            {% if i == produto_list.number %}
 
-                {% endif %}
-                {% endfor %}
-    
-                {% if produto_list.has_next %}
+            <li class="">
+                <a class="activePageSelectorFooter" style="color: var(--clr-bg);">{{i}}</a>
+            </li>
 
-                <li class="">
-                    <a class="prev-nextFooterBar" href="?page={{produto_list.next_page_number}}">Proximo</a>
-                </li>
+            {% else %}
 
-                {% else %}
+            <li class="">
+                <a class="pageSelectorFooter" href="?page{{i}}">{{i}}</a>
+            </li>
 
-                <li class="">
-                    <a class="prev-nextFooterBar" href="#" tabindex="-1" aria-disabled="true" >Proximo</a>
-                </li>
+            {% endif %}
+            {% endfor %}
 
-                {% endif %}
-            </ul>
-        </nav>
-    <!-- </div>    -->
-    
+            {% if produto_list.has_next %}
+
+            <li class="">
+                <a class="prev-nextFooterBar" href="?page={{produto_list.next_page_number}}">Proximo</a>
+            </li>
+
+            {% else %}
+
+            <li class="">
+                <a class="prev-nextFooterBar" href="#" tabindex="-1" aria-disabled="true" >Proximo</a>
+            </li>
+
+            {% endif %}
+        </ul>
+    </nav>
 </div>
 {% endblock %}
